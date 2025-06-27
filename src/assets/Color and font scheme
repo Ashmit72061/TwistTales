@@ -1,0 +1,19 @@
+| Purpose               | Color              | HEX       | Notes                                                 |
+| --------------------- | ------------------ | --------- | ----------------------------------------------------- |
+| **Background (Main)** | Soft Midnight Blue | `#0F172A` | Gives a sense of mystery and storytelling magic.      |
+| **Primary Accent**    | Vibrant Coral      | `#FB7185` | For buttons, CTAs, spinners. Adds playful energy.     |
+| **Secondary Accent**  | Electric Teal      | `#2DD4BF` | For hover effects, secondary buttons, links.          |
+| **Highlight/Glow**    | Golden Yellow      | `#FACC15` | For highlighting current story, or random selections. |
+| **Text (Primary)**    | Soft White         | `#F8FAFC` | Main readable text on dark backgrounds.               |
+| **Text (Secondary)**  | Cool Gray          | `#94A3B8` | For descriptions, metadata.                           |
+| **Card Background**   | Deep Indigo        | `#1E293B` | Story card components or modal background.            |
+| **Success/Positive**  | Fresh Lime Green   | `#86EFAC` | Optional — when story successfully loads/saved.       |
+| **Error/Warning**     | Salmon Red         | `#F87171` | For errors, invalid input.                            |
+
+
+| Type                  | Font                            | Use Case                                       | Notes                                              |
+| --------------------- | ------------------------------- | ---------------------------------------------- | -------------------------------------------------- |
+| **Primary Heading**   | `Playfair Display` (Serif)      | Title of the site, story titles, main sections | Elegant and literary, gives a storybook vibe       |
+| **Secondary Heading** | `Quicksand` (Sans-serif)        | Subheadings, cards, buttons                    | Rounded and soft, adds a friendly modern touch     |
+| **Body Text**         | `Inter` or `Nunito`             | Main content, paragraphs, descriptions         | Clean and highly readable, pairs well with serif   |
+| **Accent / Display**  | `Berkshire Swash` or `Pacifico` | For the roulette spin button, highlights       | Playful and charismatic, used sparingly for effect |

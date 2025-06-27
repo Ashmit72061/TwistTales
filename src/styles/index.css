@@ -1,0 +1,23 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Quicksand:wght@500&family=Inter:wght@400&family=Berkshire+Swash&display=swap');
+
+
+.font-heading {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-subheading {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.font-body {
+  font-family: 'Inter', sans-serif;
+}
+
+.font-fancy {
+  font-family: 'Berkshire Swash', cursive;
+}
+
+body{
+  background-color: #0F172A;
+}
