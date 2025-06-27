@@ -1,7 +1,11 @@
 import {React} from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import ProtectedSection from './ProtectedSection.jsx'
+
 import LandingPage from '../pages/LandingPage'
 import App from '../pages/App.jsx'
+import Login from '../pages/login.jsx'
+import Signup from '../pages/signup.jsx'
 
 const Router = createBrowserRouter([
     {
@@ -10,11 +14,15 @@ const Router = createBrowserRouter([
     },
     {
         path:"/login",
-        element: "",
+        element: <Login />,
+    },
+    {
+        path:"/signup",
+        element: <Signup />,
     },
     {
         path:"/app",
-        element: <App />,
+        element: <ProtectedSection><App /></ProtectedSection>,
     }
 ])
 
