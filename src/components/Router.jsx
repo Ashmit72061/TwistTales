@@ -1,6 +1,7 @@
 import {React} from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ProtectedSection from './ProtectedSection.jsx'
+import {DataProvider} from './DataContext.jsx'
 
 import LandingPage from '../pages/LandingPage'
 import App from '../pages/App.jsx'

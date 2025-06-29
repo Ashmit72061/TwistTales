@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext, useContext } from 'react'
 import { app } from '../pages/login.jsx'
 import { getFirestore, doc, getDoc, setDoc, addDoc, updateDoc, collection, getCountFromServer } from "firebase/firestore";
+import { useAuth } from './AuthContext.jsx'
 
 const DataContext = createContext();
 
@@ -32,7 +33,7 @@ async function createUniqueRoomCode() {
     return roomCode;
 }
 
-const handleCreateRoom = async (user) => {
+const handleCreateRoom = async (user, displayName) => {
     const uid = user.user?.uid || user.uid;
     const colors = ['red', 'blue', 'green', 'yellow']
     const firstColor = colors[Math.floor(Math.random() * colors.length)]
@@ -50,6 +51,7 @@ const handleCreateRoom = async (user) => {
         const collectiveRef = await setDoc(doc(db, 'Rooms', newCode, 'collective', newCode), {
             colorLeft: colors.filter(color => color !== firstColor),
             users: [uid],
+            displayName: [displayName],
             [uid]: firstColor,
             currentIndex: 0,
         })
@@ -61,24 +63,40 @@ const handleCreateRoom = async (user) => {
     return newCode;
 };
 
-const handleJoinRoom = async (user, roomcode) => {
+const handleJoinRoom = async (user, roomcode, displayName) => {
     const uid = user.user?.uid || user.uid;
+    const roomsAvailablesnap = await getDoc(doc(db, 'Rooms', roomcode))
+    // const { displayName } = useAuth();
 
-    //if roomcode is valid
-    const roomsCollective = await getDoc(doc(db, 'Rooms', roomcode, 'collective', roomcode))
-    const alreadyUser = false;
-    const userColor = roomsCollective.data().colorLeft[Math.floor(Math.random() * roomsCollective.data().colorLeft.length)]
-    try {
-        if (roomsCollective.data().users.length < 4 && !roomsCollective.data().users.includes(uid)) {
-            const addUser = await updateDoc(doc(db, 'Rooms', roomcode, 'collective', roomcode), {
-                users: [...roomsCollective.data().users, uid],
-                colorLeft: roomsCollective.data().colorLeft.filter(color => color !== userColor),
-                [uid]: userColor,
-            })
-        }
+    if (!roomsAvailablesnap.exists()) {
+        return (<div>This Room Does not exist</div>)
     }
-    catch (error) {
-        console.error("Error joining room:", error);
+    //if roomcode is valid
+    else {
+        const roomsCollective = await getDoc(doc(db, 'Rooms', roomcode, 'collective', roomcode))
+        const alreadyUser = false;
+        const userColor = roomsCollective.data().colorLeft[Math.floor(Math.random() * roomsCollective.data().colorLeft.length)]
+        try {
+            if (roomsCollective.data().users.includes(uid)) {
+                console.log("Already existing user added");
+                return 'proceed';
+            }
+            else if (roomsCollective.data().users.length < 4 && !roomsCollective.data().users.includes(uid)) {
+                const addUser = await updateDoc(doc(db, 'Rooms', roomcode, 'collective', roomcode), {
+                    users: [...roomsCollective.data().users, uid],
+                    displayName: [...roomsCollective.data().displayName, displayName],
+                    colorLeft: roomsCollective.data().colorLeft.filter(color => color !== userColor),
+                    [uid]: userColor,
+                })
+                return 'proceed'
+            }
+            else {
+                return 'Not_Found'
+            }
+        }
+        catch (error) {
+            console.error("Error joining room:", error);
+        }
     }
 }
 
@@ -107,10 +125,10 @@ const handleAddStory = async (story, roomcode, user) => {
 
 export const DataProvider = ({ children }) => {
 
-    const [roomcode, setRoomCode] = useState("");
+    const [roomcode, setRoomCode] = useState(null);
 
     return (
-        <DataContext.Provider value={{roomcode, setRoomCode}}>
+        <DataContext.Provider value={{ roomcode, setRoomCode }}>
             {children}
         </DataContext.Provider>
     )

@@ -50,7 +50,7 @@ const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    // const [isSubmitting, setIsSubmitting] = useState(false);
+    const [alreadyRegistered, setAlreadyRegistered] = useState(null);
 
     const navigate = useNavigate();
     function handleLogin(email, password) {
@@ -67,7 +67,14 @@ const Signup = () => {
                     navigate('/landing')
                 })
                 .catch((error) => {
-                    console.error("Signup Error:", error.message);
+                    if (error.code == 'auth/email-already-in-use') {
+                        setAlreadyRegistered(<div className="mt-2 flex justify-center items-center gap-2 text-sm text-[#FB7185] bg-[#1E293B] border border-[#FB7185] px-4 py-2 rounded-xl shadow">
+                            Email is already registered. Login to proceed
+                        </div>)
+                    }
+                    else {
+                        console.error("Signup Error:", error.message);
+                    }
                 });
         }
         else {
@@ -77,7 +84,7 @@ const Signup = () => {
 
     return (
         <div className="min-h-screen bg-[#0F172A] flex items-center justify-center px-4">
-            <div className="bg-[#1E293B] text-[#F8FAFC] w-full max-w-md p-8 rounded-2xl shadow-[0_4px_30px_rgba(45,212,191,0.1)]">
+            <div className="bg-[#1E293B] text-[#F8FAFC] w-full max-w-md p-6 rounded-2xl shadow-[0_4px_30px_rgba(45,212,191,0.1)]">
                 <h2 className="text-3xl font-heading font-bold text-center mb-6">
                     Welcome
                 </h2>
@@ -114,6 +121,8 @@ const Signup = () => {
                         />
                     </div>
 
+                    {alreadyRegistered}
+
                     <button
                         type="submit"
                         className="w-full bg-[#FB7185] text-[#0F172A] font-semibold py-3 rounded-xl hover:bg-[#f43f5e] transition-colors duration-200 font-body"
@@ -122,7 +131,7 @@ const Signup = () => {
                     </button>
                 </form>
 
-                <div className="flex items-center my-6 gap-3">
+                <div className="flex items-center my-3 gap-3">
                     <hr className="flex-grow border-[#94A3B8]" />
                     <span className="text-[#94A3B8] font-body">OR</span>
                     <hr className="flex-grow border-[#94A3B8]" />

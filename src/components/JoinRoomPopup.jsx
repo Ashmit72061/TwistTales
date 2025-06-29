@@ -1,10 +1,20 @@
-import { X } from "lucide-react"; // For cross icon
+import { X } from "lucide-react";
 import React, { useState } from "react";
+import { handleJoinRoom } from "./DataContext";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from './AuthContext.jsx';
+import {useDB} from './DataContext.jsx'
 
 const JoinRoomPopup = ({ isOpen, onClose }) => {
-  const [roomCode, setRoomCode] = useState("");
+  const {roomcode, setRoomCode} = useDB();
+  const [maxLimit, setMaxLimit] = useState(null);
+  const { user, displayName } = useAuth();
+  const navigate = useNavigate();
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    console.log("Popup is closed");
+    return null
+  };
 
   return (
     <div className="fixed inset-0 bg-[#0F172A]/70 backdrop-blur-[2px] flex items-center justify-center z-50">
@@ -19,8 +29,7 @@ const JoinRoomPopup = ({ isOpen, onClose }) => {
         </button>
 
         {/* Heading */}
-        <h2 className="text-2xl font-heading font-bold text-center mb-6" 
-        // style={{ fontFamily: "Playfair Display, serif" }}
+        <h2 className="text-2xl font-heading font-bold text-center mb-6"
         >
           Join a Room
         </h2>
@@ -29,23 +38,33 @@ const JoinRoomPopup = ({ isOpen, onClose }) => {
         <input
           type="text"
           placeholder="Enter Room Code"
-          value={roomCode}
+          // value={roomcode}
           onChange={(e) => setRoomCode(e.target.value)}
           className="w-full px-4 py-2 rounded-lg bg-[#0F172A] text-[#F8FAFC] placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#2DD4BF] font-body mb-4"
-        //   style={{ fontFamily: "Inter, sans-serif" }}
         />
+
+        {/* msg if max room limit reached */}
+        {maxLimit}
 
         {/* Join Button */}
         <button
           className="w-full bg-[#FB7185] text-[#0F172A] hover:bg-[#FACC15] font-subheading font-semibold py-2 rounded-lg transition-colors"
-        //   style={{ fontFamily: "Quicksand, sans-serif" }}
-          onClick={() => {
-            if (!roomCode) {
-              alert("Please enter a room code.");
-              return;
+          onClick={async () => {
+            if (!roomcode) {
+              setMaxLimit(<div>Enter a Room code</div>)
+              return
             }
             // join logic here
-            console.log("Joining room:", roomCode);
+            else {
+              const result = await handleJoinRoom(user, roomcode, displayName)
+              if (result === 'Not_Found') {
+                setMaxLimit(<div>This room does not exist</div>)
+              }
+              if (result === 'proceed') {
+                setTimeout(() => navigate('/app'), 100);
+                console.log("Joining room:", roomcode);
+              }
+            }
           }}
         >
           Join
