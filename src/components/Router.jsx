@@ -9,6 +9,10 @@ import Signup from '../pages/signup.jsx'
 
 const Router = createBrowserRouter([
     {
+        path:"/",
+        element: <LandingPage />,
+    },
+    {
         path:"/landing",
         element: <LandingPage />,
     },

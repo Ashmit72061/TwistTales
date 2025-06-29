@@ -16,26 +16,13 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 const Login = () => {
     const navigate = useNavigate();
     const { user, setUser } = useAuth();
-
-    // const firebaseConfig = {
-    //     apiKey: "AIzaSyCGOVuAByYvVwB8y7kH69Q6kMmCTxn1MYU",
-    //     authDomain: "story-roulette-aa649.firebaseapp.com",
-    //     projectId: "story-roulette-aa649",
-    //     storageBucket: "story-roulette-aa649.firebasestorage.app",
-    //     messagingSenderId: "984178771067",
-    //     appId: "1:984178771067:web:5e83c323553d2a8eeacede",
-    //     measurementId: "G-84M15X7CHQ"
-    // };
-
-    // // Initialize Firebase
-    // const app = initializeApp(firebaseConfig);
-    // const auth = getAuth(app);
+    
     const provider = new GoogleAuthProvider();
 
     function handleGoogleLogin() {
