@@ -7,6 +7,7 @@ import LandingPage from '../pages/LandingPage'
 import App from '../pages/App.jsx'
 import Login from '../pages/login.jsx'
 import Signup from '../pages/signup.jsx'
+import FinalStory from '../pages/FinalStory.jsx'
 
 const Router = createBrowserRouter([
     {
@@ -28,6 +29,10 @@ const Router = createBrowserRouter([
     {
         path:"/app",
         element: <ProtectedSection><App /></ProtectedSection>,
+    },
+    {
+        path:"/final-story",
+        element: <FinalStory />
     }
 ])
 

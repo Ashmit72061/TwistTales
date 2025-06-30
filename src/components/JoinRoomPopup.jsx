@@ -1,12 +1,12 @@
 import { X } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { handleJoinRoom } from "./DataContext";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from './AuthContext.jsx';
-import {useDB} from './DataContext.jsx'
+import { useDB } from './DataContext.jsx'
 
 const JoinRoomPopup = ({ isOpen, onClose }) => {
-  const {roomcode, setRoomCode} = useDB();
+  const { roomcode, setRoomCode } = useDB();
   const [maxLimit, setMaxLimit] = useState(null);
   const { user, displayName } = useAuth();
   const navigate = useNavigate();

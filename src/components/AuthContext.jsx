@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../pages/login";
+import LoadingDots from './loading.jsx';
 
 const AuthContext = createContext()
 
@@ -32,7 +33,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={{ user, setUser, loading, logout, displayName, setDisplayName, photoURL, setPhotoURL }}>
-            {!loading && children}
+            {loading ? <div className="h-screen flex items-center justify-center"><LoadingDots /></div> : children}
         </AuthContext.Provider>
     );
 };

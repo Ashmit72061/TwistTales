@@ -1,7 +1,6 @@
 import { useState, useEffect, createContext, useContext } from 'react'
 import { app } from '../pages/login.jsx'
 import { getFirestore, doc, getDoc, setDoc, addDoc, updateDoc, collection, getCountFromServer } from "firebase/firestore";
-import { useAuth } from './AuthContext.jsx'
 
 const DataContext = createContext();
 
@@ -54,6 +53,7 @@ const handleCreateRoom = async (user, displayName) => {
             displayName: [displayName],
             [uid]: firstColor,
             currentIndex: 0,
+            noOfTurns: 0,
         })
     }
     catch (error) {
@@ -114,8 +114,11 @@ const handleAddStory = async (story, roomcode, user) => {
             storySnippet: story,
         })
         const nextIndex = (roomsCollective.data().currentIndex + 1 > roomsCollective.data().users.length - 1) ? 0 : roomsCollective.data().currentIndex + 1
+        const nextTurn = roomsCollective.data().noOfTurns+1;
         const changeTurn = await updateDoc(doc(db, 'Rooms', roomcode, 'collective', roomcode), {
             currentIndex: nextIndex,
+            noOfTurns: nextTurn,
+            stories: [...(roomsCollective.data().stories || []), story],
         });
     }
     catch (error) {
@@ -126,6 +129,7 @@ const handleAddStory = async (story, roomcode, user) => {
 export const DataProvider = ({ children }) => {
 
     const [roomcode, setRoomCode] = useState(null);
+
 
     return (
         <DataContext.Provider value={{ roomcode, setRoomCode }}>
