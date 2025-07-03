@@ -22,6 +22,7 @@ export const auth = getAuth(app);
 const Login = () => {
     const navigate = useNavigate();
     const { user, setUser } = useAuth();
+    const [error, setError] = useState("");
     
     const provider = new GoogleAuthProvider();
 
@@ -35,17 +36,18 @@ const Login = () => {
             })
             .catch((error) => {
                 console.error("Google Sign-in Error:", error);
+                setError(error);
             });
     }
 
     //Check if user is logged in
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            console.log("User is logged in:", user.uid);
-        } else {
-            console.log("No user");
-        }
-    });
+    // onAuthStateChanged(auth, (user) => {
+    //     if (user) {
+    //         console.log("User is logged in:", user.uid);
+    //     } else {
+    //         console.log("No user");
+    //     }
+    // });
 
     //Email login states
     const [email, setEmail] = useState("")
@@ -61,6 +63,7 @@ const Login = () => {
             })
             .catch((error) => {
                 console.error("Login Error:", error.message);
+                setError(error.message);
             });
 
     }
@@ -98,6 +101,8 @@ const Login = () => {
                             onChange={(e) => { setPassword(e.target.value) }}
                         />
                     </div>
+
+                    <div className="text-red-600">{error}</div>
 
                     <button
                         type="submit"

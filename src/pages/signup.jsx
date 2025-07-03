@@ -8,6 +8,8 @@ import { useAuth } from '../components/AuthContext.jsx'
 
 const Signup = () => {
     const { user, setUser } = useAuth();
+        const [error, setError] = useState("");
+
 
     const firebaseConfig = {
         apiKey: "AIzaSyCGOVuAByYvVwB8y7kH69Q6kMmCTxn1MYU",
@@ -34,17 +36,19 @@ const Signup = () => {
             })
             .catch((error) => {
                 console.error("Google Sign-in Error:", error);
+                                setError(error);
+
             });
     }
 
     //Check if user is logged in
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            console.log("User is logged in:", user.uid);
-        } else {
-            console.log("No user");
-        }
-    });
+    // onAuthStateChanged(auth, (user) => {
+    //     if (user) {
+    //         console.log("User is logged in:", user.uid);
+    //     } else {
+    //         console.log("No user");
+    //     }
+    // });
 
     //Email signup states
     const [email, setEmail] = useState("");

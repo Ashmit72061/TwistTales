@@ -1,5 +1,6 @@
 import { X } from "lucide-react";
 import React, { useState, useRef } from "react";
+import { createPortal } from "react-dom";
 import { handleJoinRoom } from "./DataContext";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from './AuthContext.jsx';
@@ -13,11 +14,11 @@ const JoinRoomPopup = ({ isOpen, onClose }) => {
 
   if (!isOpen) {
     console.log("Popup is closed");
-    return null
-  };
+    return null;
+  }
 
-  return (
-    <div className="fixed inset-0 bg-[#0F172A]/70 backdrop-blur-[2px] flex items-center justify-center z-50">
+  const popupContent = (
+    <div className="fixed inset-0 bg-[#0F172A]/70 backdrop-blur-[2px] flex items-center justify-center z-[9999]">
       <div className="bg-[#1E293B] text-[#F8FAFC] rounded-2xl p-8 w-[90%] max-w-md relative shadow-[0_4px_30px_rgba(251,113,133,0.2)]">
         {/* Close Icon */}
         <button
@@ -29,8 +30,7 @@ const JoinRoomPopup = ({ isOpen, onClose }) => {
         </button>
 
         {/* Heading */}
-        <h2 className="text-2xl font-heading font-bold text-center mb-6"
-        >
+        <h2 className="text-2xl font-heading font-bold text-center mb-6">
           Join a Room
         </h2>
 
@@ -72,6 +72,9 @@ const JoinRoomPopup = ({ isOpen, onClose }) => {
       </div>
     </div>
   );
+
+  // Render the popup content into the document body using a portal
+  return createPortal(popupContent, document.body);
 };
 
 export default JoinRoomPopup;

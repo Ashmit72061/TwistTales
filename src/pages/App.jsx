@@ -10,6 +10,7 @@ import StoryPrompt from '../components/StoryPrompt.jsx'
 import { useAuth } from '../components/AuthContext.jsx'
 import LoadingDots from '../components/loading.jsx'
 import FloatingDocButton from '../components/FloatingDocButton.jsx'
+import { Navigate } from 'react-router-dom'
 
 
 export default function App() {
@@ -83,7 +84,7 @@ export default function App() {
 
   return (
     <>
-      <Nav />
+      {!roomcode && <Navigate to={'/landing'} />}
       <RoomCodeSection />
       <StoryPretext pretext={pretext()} />
       <StoryTextbox isTurn={uid == isTurn} roomcode={roomcode} user={user} />
