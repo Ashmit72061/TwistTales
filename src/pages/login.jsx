@@ -6,13 +6,13 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProv
 import { useAuth } from '../components/AuthContext.jsx'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCGOVuAByYvVwB8y7kH69Q6kMmCTxn1MYU",
-    authDomain: "story-roulette-aa649.firebaseapp.com",
-    projectId: "story-roulette-aa649",
-    storageBucket: "story-roulette-aa649.firebasestorage.app",
-    messagingSenderId: "984178771067",
-    appId: "1:984178771067:web:5e83c323553d2a8eeacede",
-    measurementId: "G-84M15X7CHQ"
+    apiKey: import.meta.env.VITE_Api_Key,
+    authDomain: import.meta.env.VITE_Auth_Domain,
+    projectId: import.meta.env.VITE_Project_ID,
+    storageBucket: import.meta.env.VITE_Storage_Bucket,
+    messagingSenderId: import.meta.env.VITE_Messaging_Sender_ID,
+    appId: import.meta.env.VITE_App_ID,
+    measurementId: import.meta.env.VITE_Measurement_ID
 };
 
 // Initialize Firebase

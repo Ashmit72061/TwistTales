@@ -4,25 +4,13 @@ import { FcGoogle } from 'react-icons/fc';
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useAuth } from '../components/AuthContext.jsx'
+import { app } from './login.jsx'
 
 
 const Signup = () => {
     const { user, setUser } = useAuth();
-        const [error, setError] = useState("");
+    const [error, setError] = useState("");
 
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyCGOVuAByYvVwB8y7kH69Q6kMmCTxn1MYU",
-        authDomain: "story-roulette-aa649.firebaseapp.com",
-        projectId: "story-roulette-aa649",
-        storageBucket: "story-roulette-aa649.firebasestorage.app",
-        messagingSenderId: "984178771067",
-        appId: "1:984178771067:web:5e83c323553d2a8eeacede",
-        measurementId: "G-84M15X7CHQ"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
@@ -36,7 +24,7 @@ const Signup = () => {
             })
             .catch((error) => {
                 console.error("Google Sign-in Error:", error);
-                                setError(error);
+                setError(error);
 
             });
     }

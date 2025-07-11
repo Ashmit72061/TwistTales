@@ -6,7 +6,6 @@ const DataContext = createContext();
 
 export const db = getFirestore(app)
 
-
 function generateRoomCode(length = 6) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let code = '';
