@@ -108,22 +108,61 @@ npm run dev
 ## 📁 Folder Structure
 
 ```
-TwistTales/
-├── client/                  # Frontend React App
-│   ├── public/              # Static assets
-│   └── src/
-│       ├── components/      # Reusable UI Components
-│       ├── pages/           # Storyboard, Home, Lobby, etc.
-│       ├── App.jsx          # Main app component
-│       └── main.jsx         # Entry point
-├── server/                  # Express Backend API
-│   ├── controllers/         # Route logic
-│   ├── models/              # Mongoose models
-│   ├── routes/              # API endpoints
-│   └── index.js             # Server entry point
-├── .env.example             # Template for environment variables
-├── package.json             # Project metadata and dependencies
-└── README.md                # Project documentation
+TwistTales:.
+|   .gitignore
+|   eslint.config.js
+|   FolderStructure.txt
+|   index.html
+|   package-lock.json
+|   package.json
+|   README.md
+|   vercel.json
+|   vite.config.js
+|   
++---lib
+|       utils.js
+|       
++---public
+|       vite.svg
+|       
+\---src
+    |   main.jsx
+    |   
+    +---assets
+    |       book-writer-illustration.svg
+    |       Color and font scheme
+    |       landing-hero-illustration.png
+    |       logo.png
+    |       react.svg
+    |       
+    +---components
+    |       AuthContext.jsx
+    |       DataContext.jsx
+    |       FloatingDocButton.jsx
+    |       JoinRoomPopup.jsx
+    |       LandingNav.jsx
+    |       loading.jsx
+    |       OldNavBackup.jsx
+    |       ProtectedSection.jsx
+    |       RoomCodeSection.jsx
+    |       Router.jsx
+    |       Story-pretext.jsx
+    |       Story-textbox.jsx
+    |       StoryPrompt.jsx
+    |       text-generate-effect.jsx
+    |       
+    +---pages
+    |       App.jsx
+    |       FinalStory.jsx
+    |       LandingPage.jsx
+    |       login.jsx
+    |       signup.jsx
+    |       
+    \---styles
+            App.css
+            index.css
+            
+
 ```
 ---
 ## 💡 Future Improvements
