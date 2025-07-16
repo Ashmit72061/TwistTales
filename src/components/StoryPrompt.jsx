@@ -11,7 +11,7 @@ const StoryPrompt = ({roomcode}) => {
         const res = await fetch("https://api.cohere.ai/v1/generate", {
             method: "POST",
             headers: {
-                "Authorization": import.meta.env.VITE_Authorisation,
+                "Authorization": import.meta.env.VITE_Cohere_Authorisation,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
