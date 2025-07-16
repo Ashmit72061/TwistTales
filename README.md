@@ -165,12 +165,3 @@ TwistTales:.
 
 ```
 ---
-## 💡 Future Improvements
-
-- Google or anonymous authentication
-- Timer and round-based mode
-- Public story archive
-- In-room chat and emoji reactions
-- More polished mobile UI
-
----
